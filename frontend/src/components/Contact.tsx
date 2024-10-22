@@ -91,7 +91,7 @@ const Contact: React.FC = () => {
           <FaEnvelope />
         </a>
       </ContactIcons>
-      <FooterNote>© 2023 Viola Bayeva. All rights reserved.</FooterNote>
+      <FooterNote>© 2024 Viola Bayeva. All rights reserved.</FooterNote>
     </ContactWrapper>
   );
 };

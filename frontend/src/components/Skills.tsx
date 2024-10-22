@@ -5,7 +5,7 @@ interface Project {
   title: string;
   description: string;
   github_url: string;
-  image: string;
+  images?: string[];
 }
 
 interface SkillDetail {
@@ -226,6 +226,42 @@ const fadeIn = `
   }
 `;
 
+const ImageScroller = styled.div`
+  margin-top: 20px;
+  overflow-x: auto;
+  display: flex;
+  padding-bottom: 10px;
+
+  &::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: ${theme.colors.accent};
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${theme.colors.primary};
+    border-radius: 10px;
+    border: 2px solid ${theme.colors.accent};
+  }
+`;
+
+const ScrollerImage = styled.img`
+  flex: 0 0 auto;
+  width: 800px;
+  height: 800px;
+  margin-right: 15px;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+`;
+
 const hardcodedSkills: Skill[] = [
   {
     id: 1,
@@ -240,19 +276,18 @@ const hardcodedSkills: Skill[] = [
             title: 'Concurrency lvl 1: Basic',
             description: 'A project that shows basic of mutex',
             github_url: 'https://github.com/vbayeva/MultithreadingBasic',
-            image: '',
           },
           {
             title: 'Concurrency lvl 2: Logger',
             description: 'A project that shows basic of lock_guard',
             github_url: 'https://github.com/vbayeva/Logger',
-            image: '',
+
           },
           {
             title: 'Concurrency lvl 3: Producer Consumer Model',
             description: 'A project that shows basic of condition_variable',
             github_url: 'https://github.com/vbayeva/ProducerConsumerModel',
-            image: '',
+
           },
         ],
       },
@@ -294,14 +329,50 @@ const hardcodedSkills: Skill[] = [
     icon: '/Python.png',
     details: [
       {
-        id: 2,
-        name: 'Data Science',
+        id: 1,
+        name: 'Business applications',
         projects: [
           {
-            title: 'Data Analysis Project',
-            description: 'A Python project for analyzing large datasets.',
-            github_url: 'https://github.com/your-repo/data-analysis-project',
-            image: '/path/to/project-image.png',
+            title: 'Business applications',
+            description: `During my work at Intel I am writing tools and applications using Python.
+            I cannot share the code, but here's a little application made with tkinter to show something :)`,
+            github_url: 'https://github.com/vbayeva/Text-Editor',
+            images: ['/calculator.png']
+          },
+        ],
+      },
+      {
+        id: 2,
+        name: 'Flask',
+        projects: [
+          {
+            title: 'Projects made in Flask',
+            description: `Websites that are made using Flask framework in Python
+Features: Login and registation, 
+Weather data for provided city, 
+Quiz with 5 questions about AI in Python.
+, Result table for all users.
+, User's personal score in the current quiz and for all time`,
+            github_url: 'https://github.com/vbayeva/flask-quiz',
+            images: ['/quiz.png'],
+          },
+        ],
+      },
+      {
+        id: 3,
+        name: 'Django',
+        projects: [
+          {
+            title: `Online translator`,
+            description: `Online translator which uses web scrapping to make a translation with context.`,
+            github_url: 'https://github.com/vbayeva/Online-Translator-With-Context',
+            images: ['/translator.jpg'],
+          },
+          {
+            title: `Finmaster`,
+            description: `A mobile app (react native frontend) which helps parents to teach their children financial literacy.`,
+            github_url: '',
+            images: ['/finmaster.png'],
           },
         ],
       },
@@ -310,7 +381,7 @@ const hardcodedSkills: Skill[] = [
   {
     id: 3,
     name: 'Unity3D (advanced)',
-    icon: '/Python.png',
+    icon: '/unity.png',
     details: [
       {
         id: 2,
@@ -320,7 +391,8 @@ const hardcodedSkills: Skill[] = [
             title: 'Data Analysis Project',
             description: 'A Python project for analyzing large datasets.',
             github_url: 'https://github.com/your-repo/data-analysis-project',
-            image: '/path/to/project-image.png',
+            images: [''],
+
           },
         ],
       },
@@ -329,7 +401,7 @@ const hardcodedSkills: Skill[] = [
   {
     id: 4,
     name: 'Kotlin (intermediate)',
-    icon: '/Python.png',
+    icon: '/Kotlin.png',
     details: [
       {
         id: 2,
@@ -339,7 +411,8 @@ const hardcodedSkills: Skill[] = [
             title: 'Data Analysis Project',
             description: 'A Python project for analyzing large datasets.',
             github_url: 'https://github.com/your-repo/data-analysis-project',
-            image: '/path/to/project-image.png',
+            images: [''],
+
           },
         ],
       },
@@ -358,7 +431,8 @@ const hardcodedSkills: Skill[] = [
             title: 'Data Analysis Project',
             description: 'A Python project for analyzing large datasets.',
             github_url: 'https://github.com/your-repo/data-analysis-project',
-            image: '/path/to/project-image.png',
+            images: [''],
+
           },
         ],
       },
@@ -377,13 +451,15 @@ const hardcodedSkills: Skill[] = [
             title: 'Github',
             description: 'Advanced version control usage. Basic repo management, GitHub pages',
             github_url: '',
-            image: '/path/to/project-image.png',
+            images: [''],
+
           },
           {
             title: 'Gitlab',
             description: 'A bit of CI/CD, too. PRs, code review',
             github_url: '',
-            image: '/path/to/project-image.png',
+            images: [''],
+
           },
         ],
       },
@@ -395,19 +471,22 @@ const hardcodedSkills: Skill[] = [
             title: 'VS Code',
             description: '...with lots of plugins',
             github_url: '',
-            image: '/path/to/project-image.png',
+            images: [''],
+
           },
           {
             title: 'Visual Studio',
             description: 'I can use newest version as well as the older one (I\'m taking about 17.0)',
             github_url: '',
-            image: '/path/to/project-image.png',
+            images: [''],
+
           },
           {
             title: 'Jetbrains stack',
             description: 'CLion, Pycharm, Rider',
             github_url: '',
-            image: '/path/to/project-image.png',
+            images: [''],
+
           },
         ],
       },
@@ -419,25 +498,29 @@ const hardcodedSkills: Skill[] = [
             title: 'Jira',
             description: 'For project management and agile',
             github_url: '',
-            image: '/path/to/project-image.png',
+            images: [''],
+
           },
           {
             title: 'Miro',
             description: 'For project management and brainstorming',
             github_url: '',
-            image: '/path/to/project-image.png',
+                        images: [''],
+
           },
           {
             title: 'MS Office & Teams & Outlook',
             description: 'Even excel, yes',
             github_url: '',
-            image: '/path/to/project-image.png',
+                        images: [''],
+
           },
           {
             title: 'Adobe Photoshop, Illustrator, Premier Pro',
             description: 'Used in my personal projects',
             github_url: '',
-            image: '/path/to/project-image.png',
+                        images: [''],
+
           },
         ],
       },
@@ -449,13 +532,15 @@ const hardcodedSkills: Skill[] = [
             title: 'Windows',
             description: 'Advanced user perspective, cmds, batch files',
             github_url: '',
-            image: '/path/to/project-image.png',
+                        images: [''],
+
           },
           {
             title: 'Linux',
             description: 'User and server perspective',
             github_url: '',
-            image: '/path/to/project-image.png',
+                        images: [''],
+
           },
         ],
       },
@@ -468,7 +553,7 @@ const Skills: React.FC = () => {
 
   const handleSkillClick = (skill: Skill) => {
     setSelectedSkill(skill);
-    setSelectedDetail(null); 
+    setSelectedDetail(null);
   };
 
   const handleDetailClick = (detail: SkillDetail) => {
@@ -513,9 +598,22 @@ const Skills: React.FC = () => {
                   <h5>{project.title}</h5>
                   <p>{project.description}</p>
                   {project.github_url && (
-                    <a href={project.github_url} target="_blank" rel="noopener noreferrer">
-                      GitHub Link
-                    </a>
+                    <p>
+                      <a href={project.github_url} target="_blank" rel="noopener noreferrer">
+                        GitHub Link
+                      </a>
+                    </p>
+                  )}
+                  {project.images && project.images.length > 0 && (
+                    <ImageScroller>
+                      {project.images.map((imageUrl, index) => (
+                        <ScrollerImage
+                          key={index}
+                          src={`${process.env.PUBLIC_URL + imageUrl}`}
+                          alt={`${project.title} screenshot ${index + 1}`}
+                        />
+                      ))}
+                    </ImageScroller>
                   )}
                 </div>
               ))}
